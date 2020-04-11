@@ -7,11 +7,14 @@ export BBB_ADDRESS=root@$BELA_IP
 PLATFORM=`uname`
 if [ "${PLATFORM}" = "Darwin" ]; then
     export TOOLCHAIN=/usr/local/opt
+    export CLANG=$TOOLCHAIN/llvm/bin/clang++
 else
-    export TOOLCHAIN=/usr/local
+    export TOOLCHAIN=/usr/lib/llvm-10
+    export CLANG=/usr/bin/clang++-10
 fi 
 
 # echo export TOOLCHAIN=$TOOLCHAIN
+# echo export CLANG=$CLANG
 
 #bela config for details
 #/root/Bela/resources/bin/bela-config --defines
@@ -58,5 +61,5 @@ MAIN=`realpath $BELA_ROOT/sysroot/root/Bela/default_main.cpp`
 OUTFILE="${FILE%.*}"
 
 
-echo "$TOOLCHAIN"/llvm/bin/clang++ ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} -o ${OUTFILE} ${FILE} ${MAIN}
-"$TOOLCHAIN"/llvm/bin/clang++ ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} -o ${OUTFILE} ${FILE} ${MAIN}
+echo ${CLANG} ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} -o ${OUTFILE} ${FILE} ${MAIN}
+${CLANG} ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} -o ${OUTFILE} ${FILE} ${MAIN}

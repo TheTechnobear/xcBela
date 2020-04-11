@@ -1,9 +1,8 @@
 #!/bin/bash
 
-if [ "$0" != "-bash" ] ; then  
+if [ "$0" != "-bash"  -a  "$0" != "/bin/bash" ] ; then  
     echo must be run as 
     echo . ~/bela_client/scripts/belaSetEnv
-    exit -1
 fi
 
 export BELA_IP=${BELA_IP:=192.168.7.2}
@@ -39,6 +38,8 @@ echo Commands
 echo belaExec
 echo belaCopy
 echo belaCompile 
+echo belaRun 
+echo belaCompileRun
 
 
 
