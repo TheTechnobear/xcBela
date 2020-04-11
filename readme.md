@@ -3,7 +3,7 @@ This project creates a suitable environment for cross-compiling for Bela
 supports macOS and linux (only)
 
 ## installation
-see install.md
+see [install.md](https://github.com/TheTechnobear/bela_client/blob/master/install.md)
 
 
 ## usage
