@@ -45,6 +45,7 @@ export BELA_OPTIONS=" \
     -lprussdrv -lstdc++ -lasound -lseasocks -lNE10 -lmathneon -ldl \
     -latomic \
     -lbela -lbelaextra \
+    ${LDFLAGS}
 "
 
 
