@@ -1,5 +1,6 @@
 This project creates a suitable environment for cross-compiling for Bela
 
+supports macOS and linux (only)
 
 ## installation
 see install.md
@@ -18,6 +19,19 @@ e.g.
 export BELA_IP=salt.local
 export BELA_ROOT=~/projects/bela_client
 ```
+
+## setup environment
+```
+. $BELA_ROOT/scripts/belaSetEnv
+
+```
+note: .  - do not run as a script
+
+## commands
+belaCompile a.cpp
+belaCompileRun a.cpp
+belaRun a  
+
 
 ## Credits & Resources
 

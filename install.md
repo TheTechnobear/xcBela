@@ -4,11 +4,15 @@ get bela client and scripts
 ```
 cd ~
 git clone https://github.com/thetechnobear/bela_client
+cd bela_client
+cd install
+./install
+
 ```
 
 
 
-
+## what does this install?
 
 ## macOS
 

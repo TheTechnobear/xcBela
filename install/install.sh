@@ -18,7 +18,24 @@ do
     esac
 done
 
+
 cd "$BELA_ROOT"
+
+#install tools
+if [ $do_quick -eq 0 ]; then
+  PLATFORM=`uname`
+  if [ "${PLATFORM}" = "Darwin" ]; then
+    echo install mac tools
+    ${BELA_ROOT}/install/install_mac.sh
+  else
+    echo install linux tools
+    ${BELA_ROOT}/install/install_linux.sh
+  fi 
+fi
+
+
+
+
 
 if [ $do_quick -eq 0 ]; then
     echo clone bela core from github
