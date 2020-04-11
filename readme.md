@@ -33,6 +33,53 @@ belaCompileRun a.cpp
 belaRun a  
 
 
+## other commands
+the 'usual' bela command line scripts are also available (and on the path),
+e.g. we can disable the ide with
+```
+ide.sh stop
+```
+
+## Accessing the IDE
+my main intention is not to use the IDE for development so editing and compiling. but it still has a couple of useful features I will use
+
+(assuming, Ive not display ide at that time ;)  ) 
+
+### Oscilloscope
+this is available directly in a browser using 
+http://bela.local/scope
+
+
+we can do ths from the command line too:
+
+macOS
+```
+open http://${BELA_IP}/scope
+```
+
+Linux 
+```
+chromium-browser http://${BELA_IP}/scope
+```
+
+
+### Patch GUI
+bela now supports web user interfaces, these can be access in the browser using:
+http://bela.local/gui
+
+we can do ths from the command line too:
+
+macOS
+```
+open http://${BELA_IP}/gui
+```
+
+Linux 
+```
+chromium-browser http://${BELA_IP}/gui
+```
+
+
 ## Credits & Resources
 
 article on cross-compiling on mac 
