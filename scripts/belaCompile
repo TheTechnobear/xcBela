@@ -54,8 +54,9 @@ export X_OPTS=" \
 "
 
 FILE=$1
+MAIN=`realpath $BELA_ROOT/sysroot/root/Bela/default_main.cpp`
 OUTFILE="${FILE%.*}"
 
 
-echo "$TOOLCHAIN"/llvm/bin/clang++ ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} $BELA_ROOT/sysroot/root/Bela/default_main.o -o ${OUTFILE} ${FILE}
-"$TOOLCHAIN"/llvm/bin/clang++ ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} $BELA_ROOT/sysroot/root/Bela/default_main.o -o ${OUTFILE} ${FILE}
+echo "$TOOLCHAIN"/llvm/bin/clang++ ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} -o ${OUTFILE} ${FILE} ${MAIN}
+"$TOOLCHAIN"/llvm/bin/clang++ ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} -o ${OUTFILE} ${FILE} ${MAIN}

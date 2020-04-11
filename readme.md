@@ -22,7 +22,7 @@ export BELA_ROOT=~/projects/bela_client
 
 ## setup environment
 ```
-. $BELA_ROOT/scripts/belaSetEnv
+. $BELA_ROOT/config/belaSetEnv
 
 ```
 note: .  - do not run as a script

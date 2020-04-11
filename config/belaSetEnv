@@ -7,7 +7,7 @@ if [ "$0" != "-bash" ] ; then
 fi
 
 export BELA_IP=${BELA_IP:=192.168.7.2}
-export BELA_ROOT=${BELA_ROOT:="~/bela_client"}
+export BELA_ROOT=${BELA_ROOT:="`realpath ~/bela_client`"}
 export BBB_ADDRESS=root@$BELA_IP
 
 # cant use this, as env scripts cannot get filename 
@@ -39,8 +39,6 @@ echo Commands
 echo belaExec
 echo belaCopy
 echo belaCompile 
-echo belaRun 
-echo belaCompileRun
 
 
 

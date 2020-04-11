@@ -97,7 +97,7 @@ rsync -avz root@$BELA_IP:/root/Bela/include ./sysroot/root/Bela
 rsync -avz root@$BELA_IP:/root/Bela/build/pru/pru_rtaudio_irq_bin.h ./sysroot/root/Bela/include
 rsync -avz root@$BELA_IP:/root/Bela/build/pru/pru_rtaudio_bin.h ./sysroot/root/Bela/include
 rsync -avz root@$BELA_IP:/root/Bela/lib ./sysroot/root/Bela
-scp root@$BELA_IP:./Bela/build/core/default_main.o ./sysroot/root/Bela
+scp root@$BELA_IP:./Bela/core/default_main.cpp sysroot/root/Bela/
 
 #alsa
 mkdir -p ./sysroot/usr/include/alsa
