@@ -24,7 +24,7 @@ export BELA_IP=pepper.local
 make sure you can successfully log on to bela with this,
 e.g.
 ```
-ssh root@$BELA_UIP
+ssh root@$BELA_IP
 ```
 
 
