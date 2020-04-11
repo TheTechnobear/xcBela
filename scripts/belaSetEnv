@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if [ "$0" != "-bash" ] ; then  
+    echo must be run as 
+    echo . ~/bela_client/scripts/belaSetEnv
+    exit -1
+fi
+
+export BELA_IP=${BELA_IP:=192.168.7.2}
+export BELA_ROOT=${BELA_ROOT:="~/bela_client"}
+export BBB_ADDRESS=root@$BELA_IP
+
+# cant use this, as env scripts cannot get filename 
+# export BELA_ROOT=${BELA_ROOT:="`realpath $BASEDIR/..`"}
+
+
+echo export BELA_IP=$BELA_IP
+echo export BELA_ROOT=$BELA_ROOT
+echo export BBB_ADDRESS=root@$BELA_IP
+
+export PATH=${BELA_ROOT}/scripts:${BELA_ROOT}/Bela/scripts:$PATH
+echo PATH=$PATH
+
+belaExec() {
+    echo ssh -o LogLevel=ERROR $BBB_ADDRESS "$*"
+    ssh -o LogLevel=ERROR $BBB_ADDRESS "$*"
+}
+
+belaCopy() {
+    echo scp -o LogLevel=ERROR $1 $BBB_ADDRESS:$2
+    scp -o LogLevel=ERROR $1 $BBB_ADDRESS:$2
+}
+
+# echo stop running patch and ide on bela
+# ./Bela/scripts/stop_running.sh  > /dev/null 2>&1
+# ./Bela/scripts/ide.sh stop > /dev/null 2>&1 
+
+echo Commands
+echo belaExec
+echo belaCopy
+echo belaCompile 
+
+
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+BASEDIR=$(dirname "$0")
+export BELA_IP=${BELA_IP:=192.168.7.2}
+export BELA_ROOT=${BELA_ROOT:="`realpath $BASEDIR/..`"}
+
+belaExec() {
+    ssh -o LogLevel=ERROR $BBB_ADDRESS "$*"
+}
+
+belaCopy() {
+    scp -o LogLevel=ERROR $1 $BBB_ADDRESS:$2
+}
+
+belaExec mkdir -p ./tmp
+belaCopy $1 ./tmp/$1
+belaExec "(cd ./tmp;./$*)"
+belaExec "killall $1"

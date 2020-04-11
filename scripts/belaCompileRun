@@ -1,0 +1,10 @@
+#!/bin/bash
+BASEDIR=$(dirname "$0")
+export BELA_IP=${BELA_IP:=192.168.7.2}
+export BELA_ROOT=${BELA_ROOT:="`realpath $BASEDIR/..`"}
+
+FILE=$1
+OUTFILE="${FILE%.*}"
+
+belaCompile $*
+belaRun ${OUTFILE}
