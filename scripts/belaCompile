@@ -30,10 +30,12 @@ fi
 
 export BELA_C_OPTS="-DXENOMAI_SKIN_posix -march=armv7-a -mtune=cortex-a8 -mfloat-abi=hard -mfpu=neon -ftree-vectorize -ffast-math"
 export BELA_C_OPTS="-O3 -fPIC ${BELA_C_OPTS} "
+export BELA_C_OPTS="${BELA_C_OPTS} ${CPPFLAGS}"
 
 # -I$BELA_ROOT/sysroot/usr/local/include \
 
 export BELA_OPTIONS=" \
+    -I$BELA_ROOT/sysroot/root/Bela \
     -I$BELA_ROOT/sysroot/root/Bela/include \
     -I$BELA_ROOT/sysroot/usr/xenomai/include \
     -L$BELA_ROOT/sysroot/root/Bela/lib \
@@ -41,6 +43,7 @@ export BELA_OPTIONS=" \
     -Wl,--no-as-needed -L$BELA_ROOT/sysroot/usr/xenomai/lib \
     -lcobalt -lmodechk -lpthread -lrt\
     -lprussdrv -lstdc++ -lasound -lseasocks -lNE10 -lmathneon -ldl \
+    -latomic \
     -lbela -lbelaextra \
 "
 

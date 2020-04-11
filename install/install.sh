@@ -93,6 +93,7 @@ rsync -avz root@$BELA_IP:/usr/lib/libmathneon.* ./sysroot/usr/lib
 #bela
 mkdir -p ./sysroot/root/Bela/include
 mkdir -p ./sysroot/root/Bela/lib
+rsync -avz root@$BELA_IP:/root/Bela/libraries ./sysroot/root/Bela
 rsync -avz root@$BELA_IP:/root/Bela/include ./sysroot/root/Bela
 rsync -avz root@$BELA_IP:/root/Bela/build/pru/pru_rtaudio_irq_bin.h ./sysroot/root/Bela/include
 rsync -avz root@$BELA_IP:/root/Bela/build/pru/pru_rtaudio_bin.h ./sysroot/root/Bela/include
