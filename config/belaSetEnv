@@ -39,6 +39,8 @@ echo Commands
 echo belaExec
 echo belaCopy
 echo belaCompile 
+echo belaRun 
+echo belaCompileRun
 
 
 
