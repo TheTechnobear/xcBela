@@ -1,4 +1,4 @@
-#cross compiling with cmake
+# cross compiling with cmake
 
 CMake is great :) 
 if has support for cross-compilation via toolchain
