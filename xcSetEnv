@@ -39,6 +39,18 @@ fi
 export BBB_HOSTNAME=$XC_IP
 
 
+
+PLATFORM=`uname`
+if [ "${PLATFORM}" = "Darwin" ]; then
+    alias xcScope="open http://${XC_IP}/scope"
+    alias xcGui="open http://${XC_IP}/gui"
+else
+    alias xcScope="chromium-browser http://${XC_IP}/scope"
+    alias xcGui="chromium-browser http://${XC_IP}/gui"
+fi 
+
+
+
 xcExec() {
     echo ssh -o LogLevel=ERROR $XC_SSH "$*"
     ssh -o LogLevel=ERROR $XC_SSH "$*"
@@ -57,11 +69,11 @@ echo ============================
 echo Commands
 
 echo ============================
-echo xcExec remotecmd 
-echo xcCopy localfile remotefile
-echo xcCompile patch.cpp
-echo xcRun  patch
-echo xcCompileRun patch.cpp
-
-
+echo xcExec remotecmd - execute command on remote 
+echo xcCopy localfile remotefile - copy local file to remote 
+echo xcCompile patch.cpp - compile single c++ file
+echo xcRun  patch - run (local executable) patch on remote
+echo xcCompileRun patch.cpp  - compile local file and run on remote
+echo xcScope - bring up scope
+echo xcGui - bring up gui
 

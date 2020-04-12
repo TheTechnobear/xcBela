@@ -50,11 +50,13 @@ usage note: . (dot) - do **not** run as a script directly
 
 
 ## commands
-xcExec remotecmd 
-xcCopy localfile remotefile
-xcCompile patch.cpp
-xcRun patch
-xcCompileRun patch.cpp
+xcExec remotecmd - execute command on remote 
+xcCopy localfile remotefile - copy local file to remote 
+xcCompile patch.cpp - compile single c++ file
+xcRun  patch - run (local executable) patch on remote
+xcCompileRun patch.cpp  - compile local file and run on remote
+xcScope - bring up scope
+xcGui - bring up gui
 
 
 ## using Bela tools
@@ -69,43 +71,20 @@ ide.sh stop
 
 ### Accessing Bela IDE
 my main intention is not to use the IDE for development so editing and compiling. but it still has a couple of useful features I will use
+(assuming, Ive not disabled ide at that time ;)  ) 
 
-(assuming, Ive not display ide at that time ;)  ) 
+note: shortcuts assume chromium-browser on linux
 
-#### Oscilloscope
-this is available directly in a browser using 
-http://bela.local/scope
-
-
-we can do ths from the command line too:
-
-macOS
-```
-open http://${XC_IP}/scope
-```
-
-Linux 
-```
-chromium-browser http://${XC_IP}/scope
-```
+**Oscilloscope**
+shortcut: xcScope
+this is available directly in a browser using: http://bela.local/scope
 
 
-#### Bela Patch GUI
-bela now supports web user interfaces, these can be access in the browser using:
-http://bela.local/gui
 
-we can do ths from the command line too:
-
-macOS
-```
-open http://${XC_IP}/gui
-```
-
-Linux 
-```
-chromium-browser http://${XC_IP}/gui
-```
-
+**Bela Patch GUI** 
+bela now supports web user interfaces
+shortcut: xcGui
+this can be access in the browser using: http://bela.local/gui
 
 ## Credits & Resources
 
