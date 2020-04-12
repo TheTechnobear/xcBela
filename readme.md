@@ -1,6 +1,6 @@
 ## goals
 
-This project provides a simple to install and use cross compiler environment
+This project provides a simple to install and use cross compiler environment, 
 
 
 - simple installation of cross compiling environment
@@ -10,6 +10,9 @@ e.g ./install.sh
 e.g xcCompileRun render.cpp
 
 - support for cmake, with cmake toolchain
+
+- use modern tools
+clang-10, llvm, cmake
 
 
 ## requirements

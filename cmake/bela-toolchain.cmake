@@ -19,7 +19,15 @@ endif()
 set(CMAKE_C_COMPILER_TARGET ${triple})
 set(CMAKE_CXX_COMPILER_TARGET ${triple})
 
-get_filename_component(XC_ROOT "~/xcBela" ABSOLUTE)
+if(DEFINED ENV{<XC_ROOT>})
+    set(XC_ROOT ENV{<XC_ROOT>})
+    message("using envvar XC_ROOT  - ${XC_ROOT}")
+else()
+    message("defaulting XC_ROOT to ~/xcBela")
+    get_filename_component(XC_ROOT "~/xcBela" ABSOLUTE)
+    message("using envvar XC_ROOT  - ${XC_ROOT}")
+endif()
+
 set(XC_SYSROOT ${XC_ROOT}/sysroot)
 set(CMAKE_SYSROOT ${XC_SYSROOT})
 
