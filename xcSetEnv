@@ -72,7 +72,7 @@ echo ============================
 echo xcExec remotecmd - execute command on remote 
 echo xcCopy localfile remotefile - copy local file to remote 
 echo xcCompile patch.cpp - compile single c++ file
-echo xcRun  patch - run (local executable) patch on remote
+echo xcRun  patch - run local executable patch on remote
 echo xcCompileRun patch.cpp  - compile local file and run on remote
 echo xcScope - bring up scope
 echo xcGui - bring up gui

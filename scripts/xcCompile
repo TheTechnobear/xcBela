@@ -33,18 +33,18 @@ fi
 export BELA_C_OPTS="-DXENOMAI_SKIN_posix -march=armv7-a -mtune=cortex-a8 -mfloat-abi=hard -mfpu=neon -ftree-vectorize -ffast-math"
 export BELA_C_OPTS="-O3 -fPIC ${BELA_C_OPTS} "
 export BELA_C_OPTS=" \
-    -I$XC_SYSROOT/root/Bela \
-    -I$XC_SYSROOT/root/Bela/include \
-    -I$XC_SYSROOT/usr/xenomai/include \
+    -I${XC_SYSROOT}/root/Bela \
+    -I${XC_SYSROOT}/root/Bela/include \
+    -I${XC_SYSROOT}/usr/xenomai/include \
 "
 
 
 # -I$XC_SYSROOT/usr/local/include \
 
 export BELA_LD_OPTS=" \
-    -L$XC_SYSROOT/usr/local/lib \
-    -Wl,--no-as-needed -L$XC_SYSROOT/usr/xenomai/lib \
-    -L$XC_SYSROOT/root/Bela/lib \
+    -L${XC_SYSROOT}/usr/local/lib \
+    -Wl,--no-as-needed -L${XC_SYSROOT}/usr/xenomai/lib \
+    -L${XC_SYSROOT}/root/Bela/lib \
     -lcobalt -lmodechk -lpthread -lrt\
     -lprussdrv -lstdc++ -lasound -lseasocks -lNE10 -lmathneon -ldl \
     -latomic \
@@ -54,12 +54,12 @@ export BELA_LD_OPTS=" \
 
 export XC_OPTS=" \
  --target=arm-linux-gnueabihf \
- --sysroot=$XC_SYSROOT \
- -isysroot $XC_SYSROOT \
- -isystem $XC_SYSROOT/usr/include/c++/6.3.0 \
- -isystem $XC_SYSROOT/usr/include/arm-linux-gnueabihf/c++/6.3.0 \
- -L$XC_SYSROOT/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
- -B$XC_SYSROOT/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
+ --sysroot=${XC_SYSROOT} \
+ -isysroot ${XC_SYSROOT} \
+ -isystem ${XC_SYSROOT}/usr/include/c++/6.3.0 \
+ -isystem ${XC_SYSROOT}/usr/include/arm-linux-gnueabihf/c++/6.3.0 \
+ -L${XC_SYSROOT}/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
+ -B${XC_SYSROOT}/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
  --gcc-toolchain=TOOLCHAIN/arm-linux-gnueabihf-binutils \
 "
 export XC_CPPFLAGS="${BELA_C_OPTS} ${CPPFLAGS}"
