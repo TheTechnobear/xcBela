@@ -1,8 +1,11 @@
 #!/bin/bash
 BASEDIR=$(dirname "$0")
-export BELA_IP=${BELA_IP:=192.168.7.2}
-export BELA_ROOT=${BELA_ROOT:="`realpath $BASEDIR/..`"}
-export BBB_ADDRESS=root@$BELA_IP
+export XC_IP=${XC_IP:=192.168.7.2}
+export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
+
+
+XC_SYSROOT=${XC_ROOT}/sysroot
+
 
 PLATFORM=`uname`
 if [ "${PLATFORM}" = "Darwin" ]; then
@@ -30,40 +33,43 @@ fi
 
 export BELA_C_OPTS="-DXENOMAI_SKIN_posix -march=armv7-a -mtune=cortex-a8 -mfloat-abi=hard -mfpu=neon -ftree-vectorize -ffast-math"
 export BELA_C_OPTS="-O3 -fPIC ${BELA_C_OPTS} "
-export BELA_C_OPTS="${BELA_C_OPTS} ${CPPFLAGS}"
+export BELA_C_OPTS=" \
+    -I$XC_SYSROOT/root/Bela \
+    -I$XC_SYSROOT/root/Bela/include \
+    -I$XC_SYSROOT/usr/xenomai/include \
+"
 
-# -I$BELA_ROOT/sysroot/usr/local/include \
 
-export BELA_OPTIONS=" \
-    -I$BELA_ROOT/sysroot/root/Bela \
-    -I$BELA_ROOT/sysroot/root/Bela/include \
-    -I$BELA_ROOT/sysroot/usr/xenomai/include \
-    -L$BELA_ROOT/sysroot/root/Bela/lib \
-    -L$BELA_ROOT/sysroot/usr/local/lib \
-    -Wl,--no-as-needed -L$BELA_ROOT/sysroot/usr/xenomai/lib \
+# -I$XC_SYSROOT/usr/local/include \
+
+export BELA_LD_OPTS=" \
+    -L$XC_SYSROOT/usr/local/lib \
+    -Wl,--no-as-needed -L$XC_SYSROOT/usr/xenomai/lib \
+    -L$XC_SYSROOT/root/Bela/lib \
     -lcobalt -lmodechk -lpthread -lrt\
     -lprussdrv -lstdc++ -lasound -lseasocks -lNE10 -lmathneon -ldl \
     -latomic \
     -lbela -lbelaextra \
-    ${LDFLAGS}
 "
 
 
-export X_OPTS=" \
+export XC_OPTS=" \
  --target=arm-linux-gnueabihf \
- --sysroot=$BELA_ROOT/sysroot \
- -isysroot $BELA_ROOT/sysroot \
- -isystem $BELA_ROOT/sysroot/usr/include/c++/6.3.0 \
- -isystem $BELA_ROOT/sysroot/usr/include/arm-linux-gnueabihf/c++/6.3.0 \
- -L$BELA_ROOT/sysroot/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
- -B$BELA_ROOT/sysroot/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
+ --sysroot=$XC_SYSROOT \
+ -isysroot $XC_SYSROOT \
+ -isystem $XC_SYSROOT/usr/include/c++/6.3.0 \
+ -isystem $XC_SYSROOT/usr/include/arm-linux-gnueabihf/c++/6.3.0 \
+ -L$XC_SYSROOT/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
+ -B$XC_SYSROOT/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
  --gcc-toolchain=TOOLCHAIN/arm-linux-gnueabihf-binutils \
 "
+export XC_CPPFLAGS="${BELA_C_OPTS} ${CPPFLAGS}"
+export XC_LDFLAGS="${BELA_LD_OPTS} ${LDFLAGS}"
 
 FILE=$1
-MAIN=`realpath $BELA_ROOT/sysroot/root/Bela/default_main.cpp`
+MAIN=`realpath $XC_SYSROOT/root/Bela/default_main.cpp`
 OUTFILE="${FILE%.*}"
 
 
-echo ${CLANG} ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} -o ${OUTFILE} ${FILE} ${MAIN}
-${CLANG} ${X_OPTS} ${BELA_C_OPTS} ${BELA_OPTIONS} -o ${OUTFILE} ${FILE} ${MAIN}
+echo ${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${XC_LDFLAGS} -o ${OUTFILE} ${FILE} ${MAIN}
+${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${XC_LDFLAGS} -o ${OUTFILE} ${MAIN} ${FILE} 

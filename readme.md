@@ -1,6 +1,24 @@
-This project creates a suitable environment for cross-compiling for Bela
+## goals
 
-supports macOS and linux (only)
+This project provides a simple to install and use cross compiler environment
+
+
+- simple installation of cross compiling environment
+e.g ./install.sh
+
+- easy to workflow with target board
+e.g xcCompileRun render.cpp
+
+## requirements
+supported OS are:
+- macOS
+- Linux (debian based e.g. deb/ubuntu)
+
+it would be easy to add other linux variants
+windows could probably be done using gnu/cygwin tools
+however, I dont have the time.... but Im happy to accept pull requests from others :)
+
+
 
 ## installation
 see [install.md](https://github.com/TheTechnobear/bela_client/blob/master/install.md)
@@ -16,36 +34,41 @@ you can override with environment variables, if using a different bela, or scrip
 e.g.
 
 ```
-export BELA_IP=salt.local
-export BELA_ROOT=~/projects/bela_client
+export XC_IP=salt.local
+export XC_ROOT=~/projects/bela_client
 ```
 
 ## setup environment
 ```
-. $BELA_ROOT/config/belaSetEnv
+. $XC_ROOT/config/belaSetEnv
 
 ```
-note: .  - do not run as a script
+usage note: . (dot) - do not run as a script directly 
 
 ## commands
-belaCompile a.cpp
-belaCompileRun a.cpp
-belaRun a  
+xcExec remotecmd 
+xcCopy localfile remotefile
+xcCompile patch.cpp
+xcRun patch
+xcCompileRun patch.cpp
 
 
-## other commands
+## using Bela tools
+
+
+### Bela commands
 the 'usual' bela command line scripts are also available (and on the path),
 e.g. we can disable the ide with
 ```
 ide.sh stop
 ```
 
-## Accessing the IDE
+### Accessing Bela IDE
 my main intention is not to use the IDE for development so editing and compiling. but it still has a couple of useful features I will use
 
 (assuming, Ive not display ide at that time ;)  ) 
 
-### Oscilloscope
+#### Oscilloscope
 this is available directly in a browser using 
 http://bela.local/scope
 
@@ -54,16 +77,16 @@ we can do ths from the command line too:
 
 macOS
 ```
-open http://${BELA_IP}/scope
+open http://${XC_IP}/scope
 ```
 
 Linux 
 ```
-chromium-browser http://${BELA_IP}/scope
+chromium-browser http://${XC_IP}/scope
 ```
 
 
-### Patch GUI
+#### Bela Patch GUI
 bela now supports web user interfaces, these can be access in the browser using:
 http://bela.local/gui
 
@@ -71,12 +94,12 @@ we can do ths from the command line too:
 
 macOS
 ```
-open http://${BELA_IP}/gui
+open http://${XC_IP}/gui
 ```
 
 Linux 
 ```
-chromium-browser http://${BELA_IP}/gui
+chromium-browser http://${XC_IP}/gui
 ```
 
 
@@ -90,6 +113,4 @@ https://github.com/AndrewCapon/OSXBelaCrossCompiler
 
 Bela wiki on remote compilation with Eclipse
 https://github.com/BelaPlatform/Bela/wiki/Compiling-Bela-projects-in-Eclipse
-
-
 

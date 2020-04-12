@@ -3,7 +3,16 @@
 the installation is very staightforward, and does 
 
 
-## requirments
+## requirements
+supported OS are:
+- macOS
+- Linux (debian based e.g. deb/ubuntu)
+
+it would be easy to add other linux variants
+windows could probably be done using gnu/cygwin tools
+however, I dont have the time.... but Im happy to accept pull requests from others :)
+
+
 see specific requirements below, in addition
 
 - computer (not bela) must be connected to the internet to download packages
@@ -14,21 +23,18 @@ connection to bela...
 if you are connected via USB to bela, and you can ping on 192.168.7.2, then you are good to go :) 
 
 if you have configure bela for networking over wifi/ethernet or are using a different IP address, 
-you must set the BELA_IP address according 
+you must set the XC_IP address according 
 
 e.g. 
 ```
-export BELA_IP=pepper.local
+export XC_IP=pepper.local
 ```
 
 make sure you can successfully log on to bela with this,
 e.g.
 ```
-ssh root@$BELA_IP
+ssh root@$XC_IP
 ```
-
-
-now we are ready to install, for either Mac or Linux (debian based)
 
 
 ## Installing on Mac OS 
@@ -52,7 +58,8 @@ brew install arm-linux-gnueabihf-binutils llvm rsync coreutils
 ## Installing on Linux
 
 Note: currently im only supporting debian (using apt), though its trival to change the install scripts for other distros, 
-but i simply do not have the time to do this - if you use another distro feel free to send me a pull request with changes.
+should be simply a matter of replacing apt-get to with pacman or whatever your distro provides
+(if make it work on another disto, please send me a PR with changes)
 
 
 linux is a litte more involved as before we start running the install we must manually configure apt/deb  to pick up packages from them LLVM repository

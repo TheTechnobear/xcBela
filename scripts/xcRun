@@ -1,22 +1,22 @@
 #!/bin/bash
 BASEDIR=$(dirname "$0")
-export BELA_IP=${BELA_IP:=192.168.7.2}
-export BELA_ROOT=${BELA_ROOT:="`realpath $BASEDIR/..`"}
-export BELA_CL_OPTS=${BELA_CL_OPTS:=" "}
+export XC_IP=${XC_IP:=192.168.7.2}
+export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
+export XC_CL_OPTS=${XC_CL_OPTS:=" "}
 
 ## ide defaults are: -p 16 -C 8 -B 16 -H -6 -N 1 -G 1 -M 0 -D 0 -A --pga-gain-left 10 --pga-gain-right 10
 ## however, these are in the -h text anyway, so easier to read there ;) 
 
 
-belaExec() {
+xcExec() {
     ssh -o LogLevel=ERROR $BBB_ADDRESS "$*"
 }
 
-belaCopy() {
+xcCopy() {
     scp -o LogLevel=ERROR $1 $BBB_ADDRESS:$2
 }
 
-belaExec mkdir -p ./tmp
-belaCopy $1 ./tmp/$1
-belaExec "(cd ./tmp;./$* ${BELA_CL_OPTS} )"
-belaExec "killall $1"
+xcExec mkdir -p ./tmp
+xcCopy $1 ./tmp/$1
+xcExec "(cd ./tmp;./$* ${XC_CL_OPTS} )"
+xcExec "killall $1"
