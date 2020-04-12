@@ -61,8 +61,8 @@ xcScope - bring up scope
 xcGui - bring up gui
 
 ## using with cmake
-included in this project is a template which can be used as a cmake toolchain
-see[cmakefaq.md](https://github.com/TheTechnobear/bela_client/blob/master/cmakefaq.md)
+included in this project is a template which can be used as a cmake toolchain, 
+see [cmakefaq.md](https://github.com/TheTechnobear/bela_client/blob/master/cmake/cmakefaq.md)
 
 
 ## using Bela tools
