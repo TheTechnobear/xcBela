@@ -8,10 +8,10 @@ you can still include other definitions
 
 e.g.
 ```
-cmake -DCMAKE_TOOLCHAIN_FILE=~/bela_client/cmake/bela-toolchain.cmake  -DBELA=on ..
+cmake -DCMAKE_TOOLCHAIN_FILE=~/xcBela/cmake/bela-toolchain.cmake  -DBELA=on ..
 ```
 
-there the toolchain is speficied as `-DCMAKE_TOOLCHAIN_FILE=~/bela_client/cmake/bela-toolchain.cmake`
+there the toolchain is speficied as `-DCMAKE_TOOLCHAIN_FILE=~/xcBela/cmake/bela-toolchain.cmake`
 
 
 note:

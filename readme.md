@@ -24,13 +24,13 @@ however, I dont have the time.... but Im happy to accept pull requests from othe
 
 
 ## installation
-see [install.md](https://github.com/TheTechnobear/bela_client/blob/master/install.md)
+see [install.md](https://github.com/TheTechnobear/xcBela/blob/master/install.md)
 
 
 ## usage
 
 installs and runs by default using 
-location: `~/bela_client`
+location: `~/xcBela`
 bela hostname : `192.168.7.2` , default for usb
 
 you can override with environment variables, if using a different bela, or scripts placed somewhere else
@@ -38,10 +38,10 @@ e.g.
 
 ```
 export XC_IP=salt.local
-export XC_ROOT=~/projects/bela_client
+export XC_ROOT=~/projects/xcBela
 ```
 
-note: when these are stored in `~/.bela_client.config`, by install.sh, and xcSetEnv, so only need to be done once, or if you are changing target etc.
+note: when these are stored in `~/.xcBela.config`, by install.sh, and xcSetEnv, so only need to be done once, or if you are changing target etc.
 
 ## setup environment
 ```
@@ -62,7 +62,7 @@ xcGui - bring up gui
 
 ## using with cmake
 included in this project is a template which can be used as a cmake toolchain, 
-see [cmakefaq.md](https://github.com/TheTechnobear/bela_client/blob/master/cmake/cmakefaq.md)
+see [cmakefaq.md](https://github.com/TheTechnobear/xcBela/blob/master/cmake/cmakefaq.md)
 
 
 ## using Bela tools

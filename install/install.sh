@@ -7,7 +7,7 @@ export XC_SSH=root@$XC_IP
 
 echo XC_IP : $XC_IP, XC_ROOT : $XC_ROOT
 
-echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT" > ~/.bela_client.config
+echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT" > ~/.xcBela.config
 
 
 ping -c 1 -t 1 $XC_IP >/dev/null 2>&1 

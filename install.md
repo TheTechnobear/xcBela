@@ -41,8 +41,8 @@ ssh root@$XC_IP
 get bela client and scripts
 ```
 cd ~
-git clone https://github.com/thetechnobear/bela_client
-cd bela_client
+git clone https://github.com/thetechnobear/xcBela
+cd xcBela
 cd install
 ./install
 ```
@@ -87,8 +87,8 @@ Now we are ready to do the install :)
 
 ```
 cd ~
-git clone https://github.com/thetechnobear/bela_client
-cd bela_client
+git clone https://github.com/thetechnobear/xcBela
+cd xcBela
 cd install
 ./install
 ```

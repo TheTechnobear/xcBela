@@ -2,23 +2,23 @@
 
 if [ "$0" != "-bash"  -a  "$0" != "/bin/bash" ] ; then  
     echo must be run as 
-    echo . ~/bela_client/xcSetEnv
+    echo . ~/xcBela/xcSetEnv
 fi
 
 
 if [ "$XC_ROOT" == "" -o "XC_IP" == "" ] ; then
-    if [ -f ~/.bela_client.config ] ; then 
-        echo using ~/.bela_client.config
-        . ~/.bela_client.config
+    if [ -f ~/.xcBela.config ] ; then 
+        echo using ~/.bxcBela.config
+        . ~/.xcBela.config
     fi
 fi
 
 export XC_IP=${XC_IP:=192.168.7.2}
-export XC_ROOT=${XC_ROOT:="`realpath ~/bela_client`"}
+export XC_ROOT=${XC_ROOT:="`realpath ~/xcBela`"}
 export XC_SSH=root@$XC_IP
 
 # store XC_IP/XC_ROOT for next time (user may have overridden)
-echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT" > ~/.bela_client.config
+echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT" > ~/.xcBela.config
 
 
 # cant use this, as env scripts cannot get filename 

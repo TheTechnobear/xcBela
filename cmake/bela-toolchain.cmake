@@ -19,7 +19,7 @@ endif()
 set(CMAKE_C_COMPILER_TARGET ${triple})
 set(CMAKE_CXX_COMPILER_TARGET ${triple})
 
-get_filename_component(XC_ROOT "~/bela_client" ABSOLUTE)
+get_filename_component(XC_ROOT "~/xcBela" ABSOLUTE)
 set(XC_SYSROOT ${XC_ROOT}/sysroot)
 set(CMAKE_SYSROOT ${XC_SYSROOT})
 
