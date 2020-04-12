@@ -9,6 +9,9 @@ e.g ./install.sh
 - easy to workflow with target board
 e.g xcCompileRun render.cpp
 
+- support for cmake, with cmake toolchain
+
+
 ## requirements
 supported OS are:
 - macOS
@@ -43,7 +46,6 @@ note: when these are stored in `~/.bela_client.config`, by install.sh, and xcSet
 ## setup environment
 ```
 . $XC_ROOT/xcSetEnv
-
 ```
 usage note: . (dot) - do **not** run as a script directly 
 
@@ -57,6 +59,10 @@ xcRun  patch - run (local executable) patch on remote
 xcCompileRun patch.cpp  - compile local file and run on remote
 xcScope - bring up scope
 xcGui - bring up gui
+
+## using with cmake
+included in this project is a template which can be used as a cmake toolchain
+see[cmakefaq.md](https://github.com/TheTechnobear/bela_client/blob/master/cmakefaq.md)
 
 
 ## using Bela tools
