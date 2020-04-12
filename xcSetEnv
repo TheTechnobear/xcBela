@@ -2,31 +2,51 @@
 
 if [ "$0" != "-bash"  -a  "$0" != "/bin/bash" ] ; then  
     echo must be run as 
-    echo . ~/bela_client/scripts/belaSetEnv
+    echo . ~/bela_client/xcSetEnv
+fi
+
+
+if [ "$XC_ROOT" == "" -o "XC_IP" == "" ] ; then
+    if [ -f ~/.bela_client.config ] ; then 
+        echo using ~/.bela_client.config
+        . ~/.bela_client.config
+    fi
 fi
 
 export XC_IP=${XC_IP:=192.168.7.2}
 export XC_ROOT=${XC_ROOT:="`realpath ~/bela_client`"}
-export BBB_HOSTNAME=$XC_IP
+export XC_SSH=root@$XC_IP
+
+# store XC_IP/XC_ROOT for next time (user may have overridden)
+echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT" > ~/.bela_client.config
+
 
 # cant use this, as env scripts cannot get filename 
 # export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
-
-
 echo export XC_IP=$XC_IP
 echo export XC_ROOT=$XC_ROOT
 
 export PATH=${XC_ROOT}/scripts:${XC_ROOT}/Bela/scripts:$PATH
 echo PATH=$PATH
 
+
+ping -c 1 -t 1 $XC_IP >/dev/null 2>&1 
+if [ $? -ne 0 ]; then
+    echo WARNING: unable to connect to ${XC_IP}, check XC_IP?
+fi
+
+
+export BBB_HOSTNAME=$XC_IP
+
+
 xcExec() {
-    echo ssh -o LogLevel=ERROR $BBB_ADDRESS "$*"
-    ssh -o LogLevel=ERROR $BBB_ADDRESS "$*"
+    echo ssh -o LogLevel=ERROR $XC_SSH "$*"
+    ssh -o LogLevel=ERROR $XC_SSH "$*"
 }
 
 xcCopy() {
-    echo scp -o LogLevel=ERROR $1 $BBB_ADDRESS:$2
-    scp -o LogLevel=ERROR $1 $BBB_ADDRESS:$2
+    echo scp -o LogLevel=ERROR $1 $XC_SSH:$2
+    scp -o LogLevel=ERROR $1 $XC_SSH:$2
 }
 
 # echo stop running patch and ide on bela

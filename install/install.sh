@@ -3,10 +3,18 @@
 BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
 export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
-export BBB_ADDRESS=root@$XC_IP
+export XC_SSH=root@$XC_IP
 
 echo XC_IP : $XC_IP, XC_ROOT : $XC_ROOT
 
+echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT" > ~/.bela_client.config
+
+
+ping -c 1 -t 1 $XC_IP >/dev/null 2>&1 
+if [ $? -ne 0 ]; then
+    echo WARNING: unable to connect to ${XC_IP}, check XC_IP?
+    exit -1
+fi
 
 do_upgrade=0
 while getopts "q?" opt
@@ -32,6 +40,9 @@ if [ $do_upgrade -eq 0 ]; then
     ${XC_ROOT}/install/install_linux.sh
   fi 
 fi
+
+
+export BBB_HOSTNAME=$XC_IP
 
 
 if [ $do_upgrade -eq 0 ]; then

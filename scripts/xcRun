@@ -3,17 +3,24 @@ BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
 export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
 export XC_CL_OPTS=${XC_CL_OPTS:=" "}
+export XC_SSH=root@$XC_IP
 
 ## ide defaults are: -p 16 -C 8 -B 16 -H -6 -N 1 -G 1 -M 0 -D 0 -A --pga-gain-left 10 --pga-gain-right 10
 ## however, these are in the -h text anyway, so easier to read there ;) 
 
+ping -c 1 -t 1 $XC_IP >/dev/null 2>&1 
+if [ $? -ne 0 ]; then
+    echo WARNING: unable to connect to ${XC_IP}, check XC_IP?
+    exit -1
+fi
+
 
 xcExec() {
-    ssh -o LogLevel=ERROR $BBB_ADDRESS "$*"
+    ssh -o LogLevel=ERROR $XC_SSH "$*"
 }
 
 xcCopy() {
-    scp -o LogLevel=ERROR $1 $BBB_ADDRESS:$2
+    scp -o LogLevel=ERROR $1 $XC_SSH:$2
 }
 
 xcExec mkdir -p ./tmp

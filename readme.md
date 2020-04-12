@@ -38,12 +38,16 @@ export XC_IP=salt.local
 export XC_ROOT=~/projects/bela_client
 ```
 
+note: when these are stored in `~/.bela_client.config`, by install.sh, and xcSetEnv, so only need to be done once, or if you are changing target etc.
+
 ## setup environment
 ```
-. $XC_ROOT/config/belaSetEnv
+. $XC_ROOT/xcSetEnv
 
 ```
-usage note: . (dot) - do not run as a script directly 
+usage note: . (dot) - do **not** run as a script directly 
+
+
 
 ## commands
 xcExec remotecmd 
