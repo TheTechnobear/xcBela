@@ -21,7 +21,7 @@ do_upgrade=0
 while getopts "q?" opt
 do
     case $opt in
-    (u) do_upgrade=0 ; do_upgrade=1 ;;
+    (u) do_upgrade=1 ;;
     (?) echo "-u = upgrade" && exit 1 ;;
     (*) printf "Illegal option '-%s'\n" "$opt" && exit 1 ;;
     esac
