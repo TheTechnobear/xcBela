@@ -6,7 +6,7 @@ if [ "$0" != "-bash"  -a  "$0" != "/bin/bash" ] ; then
 fi
 
 
-if [ "$XC_ROOT" == "" -o "$XC_IP" == "" -o "$XC_SSH" == ""] ; then
+if [ "$XC_ROOT" == "" -o "$XC_IP" == "" -o "$XC_SSH" == "" ] ; then
     if [ -f ~/.xcBela.config ] ; then 
         echo using ~/.bxcBela.config
         . ~/.xcBela.config
