@@ -3,7 +3,8 @@ set -e
 BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
 export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
-export BBB_ADDRESS=root@$XC_IP
+export XC_SSH=${XC_SSH:=root@$XC_IP}
+export BBB_ADDRESS=$XC_SSH
 
 #additional
 cd "$XC_ROOT/Bela"
@@ -12,8 +13,8 @@ echo update bela lib
 #cannot push straight to the branch as it is most likely the currently checkout
 #branch
 BRANCH=`git branch --show-current`
-git push root@$XC_IP:Bela $BRANCH:tmp-$BRANCH
-ssh root@$XC_IP "cd Bela && git checkout $BRANCH && git merge tmp-$BRANCH && git branch -D tmp-$BRANCH && make lib"
+git push $XC_SSH:Bela $BRANCH:tmp-$BRANCH
+ssh $XC_SSH "cd Bela && git checkout $BRANCH && git merge tmp-$BRANCH && git branch -D tmp-$BRANCH && make lib"
 
 cd "$XC_ROOT"
 
@@ -21,34 +22,34 @@ echo copying some additional files
 #xenomai
 mkdir -p ./sysroot/usr/xenomai/include
 mkdir -p ./sysroot/usr/xenomai/lib
-rsync -avz root@$XC_IP:/usr/xenomai/include ./sysroot/usr/xenomai
-rsync -avz root@$XC_IP:/usr/xenomai/lib ./sysroot/usr/xenomai
+rsync -avz $XC_SSH:/usr/xenomai/include ./sysroot/usr/xenomai
+rsync -avz $XC_SSH:/usr/xenomai/lib ./sysroot/usr/xenomai
 
 #'missing'
-rsync -avz root@$XC_IP:/usr/lib/libNE10.* ./sysroot/usr/lib
-rsync -avz root@$XC_IP:/usr/lib/libmathneon.* ./sysroot/usr/lib
+rsync -avz $XC_SSH:/usr/lib/libNE10.* ./sysroot/usr/lib
+rsync -avz $XC_SSH:/usr/lib/libmathneon.* ./sysroot/usr/lib
 
 #bela
 mkdir -p ./sysroot/root/Bela/include
 mkdir -p ./sysroot/root/Bela/lib
-rsync -avz root@$XC_IP:/root/Bela/libraries ./sysroot/root/Bela
-rsync -avz root@$XC_IP:/root/Bela/include ./sysroot/root/Bela
-rsync -avz root@$XC_IP:/root/Bela/build/pru/pru_rtaudio_irq_bin.h ./sysroot/root/Bela/include
-rsync -avz root@$XC_IP:/root/Bela/build/pru/pru_rtaudio_bin.h ./sysroot/root/Bela/include
-rsync -avz root@$XC_IP:/root/Bela/lib ./sysroot/root/Bela
-scp root@$XC_IP:./Bela/core/default_main.cpp sysroot/root/Bela/
+rsync -avz $XC_SSH:/root/Bela/libraries ./sysroot/root/Bela
+rsync -avz $XC_SSH:/root/Bela/include ./sysroot/root/Bela
+rsync -avz $XC_SSH:/root/Bela/build/pru/pru_rtaudio_irq_bin.h ./sysroot/root/Bela/include
+rsync -avz $XC_SSH:/root/Bela/build/pru/pru_rtaudio_bin.h ./sysroot/root/Bela/include
+rsync -avz $XC_SSH:/root/Bela/lib ./sysroot/root/Bela
+scp $XC_SSH:./Bela/core/default_main.cpp sysroot/root/Bela/
 
 #alsa
 mkdir -p ./sysroot/usr/include/alsa
-rsync -avz root@$XC_IP:/usr/include/alsa ./sysroot/usr/include
+rsync -avz $XC_SSH:/usr/include/alsa ./sysroot/usr/include
 
 #usr/local
 mkdir -p ./sysroot/usr/local/lib
 mkdir -p ./sysroot/usr/local/include
-rsync -avz root@$XC_IP:/usr/local/include/prussdrv.h ./sysroot/usr/local/include
-rsync -avz root@$XC_IP:/usr/local/include/seasocks ./sysroot/usr/local/include
-rsync -avz root@$XC_IP:/usr/local/lib/libpd.* ./sysroot/usr/local/lib
-rsync -avz root@$XC_IP:/usr/local/lib/libseasocks.* ./sysroot/usr/local/lib
-rsync -avz root@$XC_IP:/usr/local/lib/libprussdrv.* ./sysroot/usr/local/lib
-rsync -avz root@$XC_IP:/usr/local/include/libpd ./sysroot/usr/local/include
-rsync -avz root@$XC_IP:/usr/local/lib/libpd.so* ./sysroot/usr/local/lib
+rsync -avz $XC_SSH:/usr/local/include/prussdrv.h ./sysroot/usr/local/include
+rsync -avz $XC_SSH:/usr/local/include/seasocks ./sysroot/usr/local/include
+rsync -avz $XC_SSH:/usr/local/lib/libpd.* ./sysroot/usr/local/lib
+rsync -avz $XC_SSH:/usr/local/lib/libseasocks.* ./sysroot/usr/local/lib
+rsync -avz $XC_SSH:/usr/local/lib/libprussdrv.* ./sysroot/usr/local/lib
+rsync -avz $XC_SSH:/usr/local/include/libpd ./sysroot/usr/local/include
+rsync -avz $XC_SSH:/usr/local/lib/libpd.so* ./sysroot/usr/local/lib

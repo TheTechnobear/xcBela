@@ -6,7 +6,7 @@ if [ "$0" != "-bash"  -a  "$0" != "/bin/bash" ] ; then
 fi
 
 
-if [ "$XC_ROOT" == "" -o "XC_IP" == "" ] ; then
+if [ "$XC_ROOT" == "" -o "$XC_IP" == "" -o "$XC_SSH" == ""] ; then
     if [ -f ~/.xcBela.config ] ; then 
         echo using ~/.bxcBela.config
         . ~/.xcBela.config
@@ -15,10 +15,13 @@ fi
 
 export XC_IP=${XC_IP:=192.168.7.2}
 export XC_ROOT=${XC_ROOT:="`realpath ~/xcBela`"}
-export XC_SSH=root@$XC_IP
+export XC_SSH=${XC_SSH:=root@$XC_IP}
+
+export BBB_HOSTNAME=$XC_IP
+export BBB_ADDRESS=$XC_SSH
 
 # store XC_IP/XC_ROOT for next time (user may have overridden)
-echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT" > ~/.xcBela.config
+echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT;export XC_SSH=$XC_SSH" > ~/.xcBela.config
 
 
 # cant use this, as env scripts cannot get filename 
@@ -34,9 +37,6 @@ ping -c 1 -t 1 $XC_IP >/dev/null 2>&1
 if [ $? -ne 0 ]; then
     echo WARNING: unable to connect to ${XC_IP}, check XC_IP?
 fi
-
-
-export BBB_HOSTNAME=$XC_IP
 
 
 
