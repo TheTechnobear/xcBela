@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
@@ -7,10 +6,9 @@ export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
 export XC_SSH=${XC_SSH:=root@$XC_IP}
 
 
-echo XC_IP : $XC_IP, XC_ROOT : $XC_ROOT
+echo XC_IP : $XC_IP, XC_ROOT : $XC_ROOT, XC_SSH $XC_SSH
 
-echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT" > ~/.xcBela.config
-
+echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT;export XC_SSH=$XC_SSH" > ~/.xcBela.config
 
 ping -c 1 -t 1 $XC_IP >/dev/null 2>&1 
 if [ $? -ne 0 ]; then
@@ -28,6 +26,7 @@ do
     esac
 done
 
+set -e
 
 cd "$XC_ROOT"
 

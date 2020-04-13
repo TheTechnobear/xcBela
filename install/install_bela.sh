@@ -6,7 +6,6 @@ export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
 export XC_SSH=${XC_SSH:=root@$XC_IP}
 export BBB_ADDRESS=$XC_SSH
 
-#additional
 cd "$XC_ROOT/Bela"
 echo update bela lib
 #ensure that we have the same version of Bela on host and remote
