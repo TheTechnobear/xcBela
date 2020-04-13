@@ -38,6 +38,8 @@ mkdir -p ./sysroot/usr/include/alsa
 rsync -avz root@$XC_IP:/usr/include/alsa ./sysroot/usr/include
 
 #usr/local
+mkdir -p ./sysroot/usr/local/lib
+mkdir -p ./sysroot/usr/local/include
 rsync -avz root@$XC_IP:/usr/local/include/prussdrv.h ./sysroot/usr/local/include
 rsync -avz root@$XC_IP:/usr/local/include/seasocks ./sysroot/usr/local/include
 rsync -avz root@$XC_IP:/usr/local/lib/libpd.* ./sysroot/usr/local/lib

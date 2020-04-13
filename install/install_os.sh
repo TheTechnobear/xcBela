@@ -14,12 +14,3 @@ rsync -rzLR --safe-links \
       root@$XC_IP:/usr/include \
       root@$XC_IP:/lib/arm-linux-gnueabihf \
       sysroot/ 
-
-mkdir -p ./sysroot/usr/local/lib
-mkdir -p ./sysroot/usr/local/include
-
-
-#additional
-#alsa
-mkdir -p ./sysroot/usr/include/alsa
-rsync -avz root@$XC_IP:/usr/include/alsa ./sysroot/usr/include
