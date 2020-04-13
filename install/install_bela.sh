@@ -45,7 +45,3 @@ rsync -avz root@$XC_IP:/usr/local/lib/libseasocks.* ./sysroot/usr/local/lib
 rsync -avz root@$XC_IP:/usr/local/lib/libprussdrv.* ./sysroot/usr/local/lib
 rsync -avz root@$XC_IP:/usr/local/include/libpd ./sysroot/usr/local/include
 rsync -avz root@$XC_IP:/usr/local/lib/libpd.so* ./sysroot/usr/local/lib
-
-
-
- 

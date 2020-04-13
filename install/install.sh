@@ -61,10 +61,6 @@ fi
 
 if [ $do_upgrade -eq 0 ]; then
   ./install/install_os.sh
-  #rsync -avz root@$XC_IP:/usr/lib/arm-linux-gnueabihf/libsndfile.* ./sysroot/usr/lib/arm-linux-gnueabihf/
-  #rsync -avz root@$XC_IP:/usr/lib/arm-linux-gnueabihf/libasound.* ./sysroot/usr/lib/arm-linux-gnueabihf/
 fi
 
 ./install/install_bela.sh
-
- 
