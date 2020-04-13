@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
@@ -47,7 +48,7 @@ export BBB_HOSTNAME=$XC_IP
 
 if [ $do_upgrade -eq 0 ]; then
   echo clone bela core from github
-  git clone https://github.com/BelaPlatform/Bela.git
+  git clone https://github.com/BelaPlatform/Bela.git || true
   cd Bela
   git checkout master
 
