@@ -1,17 +1,24 @@
+#!/bin/bash
+set -e
 BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
 export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
 export BBB_ADDRESS=root@$XC_IP
 
+#additional
+cd "$XC_ROOT/Bela"
+echo update bela lib
+#ensure that we have the same version of Bela on host and remote
+#cannot push straight to the branch as it is most likely the currently checkout
+#branch
+BRANCH=`git branch --show-current`
+git push root@$XC_IP:Bela $BRANCH:tmp-$BRANCH
+ssh root@$XC_IP "cd Bela && git checkout $BRANCH && git merge tmp-$BRANCH && git branch -D tmp-$BRANCH && make lib"
+
 cd "$XC_ROOT"
 
-#additional
-echo update bela lib
-ssh root@$XC_IP make -C ./Bela lib
-
-
 echo copying some additional files
-#xenoami
+#xenomai
 mkdir -p ./sysroot/usr/xenomai/include
 mkdir -p ./sysroot/usr/xenomai/lib
 rsync -avz root@$XC_IP:/usr/xenomai/include ./sysroot/usr/xenomai
@@ -36,6 +43,8 @@ mkdir -p ./sysroot/usr/include/alsa
 rsync -avz root@$XC_IP:/usr/include/alsa ./sysroot/usr/include
 
 #usr/local
+mkdir -p ./sysroot/usr/local/lib
+mkdir -p ./sysroot/usr/local/include
 rsync -avz root@$XC_IP:/usr/local/include/prussdrv.h ./sysroot/usr/local/include
 rsync -avz root@$XC_IP:/usr/local/include/seasocks ./sysroot/usr/local/include
 rsync -avz root@$XC_IP:/usr/local/lib/libpd.* ./sysroot/usr/local/lib
@@ -43,7 +52,3 @@ rsync -avz root@$XC_IP:/usr/local/lib/libseasocks.* ./sysroot/usr/local/lib
 rsync -avz root@$XC_IP:/usr/local/lib/libprussdrv.* ./sysroot/usr/local/lib
 rsync -avz root@$XC_IP:/usr/local/include/libpd ./sysroot/usr/local/include
 rsync -avz root@$XC_IP:/usr/local/lib/libpd.so* ./sysroot/usr/local/lib
-
-
-
- 

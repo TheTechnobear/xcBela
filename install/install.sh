@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
@@ -20,7 +21,7 @@ do_upgrade=0
 while getopts "q?" opt
 do
     case $opt in
-    (u) do_upgrade=0 ; do_upgrade=1 ;;
+    (u) do_upgrade=1 ;;
     (?) echo "-u = upgrade" && exit 1 ;;
     (*) printf "Illegal option '-%s'\n" "$opt" && exit 1 ;;
     esac
@@ -47,7 +48,7 @@ export BBB_HOSTNAME=$XC_IP
 
 if [ $do_upgrade -eq 0 ]; then
   echo clone bela core from github
-  git clone https://github.com/BelaPlatform/Bela.git
+  git clone https://github.com/BelaPlatform/Bela.git || true
   cd Bela
   git checkout master
 
@@ -60,10 +61,6 @@ fi
 
 if [ $do_upgrade -eq 0 ]; then
   ./install/install_os.sh
-  #rsync -avz root@$XC_IP:/usr/lib/arm-linux-gnueabihf/libsndfile.* ./sysroot/usr/lib/arm-linux-gnueabihf/
-  #rsync -avz root@$XC_IP:/usr/lib/arm-linux-gnueabihf/libasound.* ./sysroot/usr/lib/arm-linux-gnueabihf/
 fi
 
 ./install/install_bela.sh
-
- 
