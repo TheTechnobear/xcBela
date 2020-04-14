@@ -42,8 +42,9 @@ export BELA_C_OPTS=" \
 # -I$XC_SYSROOT/usr/local/include \
 
 export BELA_LD_OPTS=" \
+    -Wl,--no-as-needed \
     -L${XC_SYSROOT}/usr/local/lib \
-    -Wl,--no-as-needed -L${XC_SYSROOT}/usr/xenomai/lib \
+    -L${XC_SYSROOT}/usr/xenomai/lib \
     -L${XC_SYSROOT}/root/Bela/lib \
     -lcobalt -lmodechk -lpthread -lrt\
     -lprussdrv -lstdc++ -lasound -lseasocks -lNE10 -lmathneon -ldl \
@@ -65,9 +66,9 @@ export XC_OPTS=" \
 export XC_CPPFLAGS="${BELA_C_OPTS} ${CPPFLAGS}"
 export XC_LDFLAGS="${BELA_LD_OPTS} ${LDFLAGS}"
 
-MAIN=`realpath $XC_SYSROOT/root/Bela/default_main.cpp`
+MAIN=`realpath $XC_ROOT/Bela/Core/default_main.cpp`
 
 OUTFILE=$1
 
-echo ${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${XC_LDFLAGS} -o ${OUTFILE} ${MAIN} *.cpp
-${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${XC_LDFLAGS} -o ${OUTFILE} ${MAIN} *.cpp
+echo ${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${MAIN} *.cpp ${XC_LDFLAGS} -o ${OUTFILE} 
+${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${MAIN} *.cpp ${XC_LDFLAGS} -o ${OUTFILE} 

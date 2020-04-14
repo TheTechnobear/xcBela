@@ -38,7 +38,6 @@ rsync -avz $XC_SSH:/root/Bela/include ./sysroot/root/Bela
 rsync -avz $XC_SSH:/root/Bela/build/pru/pru_rtaudio_irq_bin.h ./sysroot/root/Bela/include
 rsync -avz $XC_SSH:/root/Bela/build/pru/pru_rtaudio_bin.h ./sysroot/root/Bela/include
 rsync -avz $XC_SSH:/root/Bela/lib ./sysroot/root/Bela
-scp $XC_SSH:./Bela/core/default_main.cpp sysroot/root/Bela/
 
 #alsa
 mkdir -p ./sysroot/usr/include/alsa
