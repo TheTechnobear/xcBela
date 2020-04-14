@@ -57,9 +57,9 @@ usage note: . (dot) - do **not** run as a script directly
 ## commands
 xcExec remotecmd - execute command on remote 
 xcCopy localfile remotefile - copy local file to remote 
-xcCompile patch.cpp - compile single c++ file
+xcCompile patch - compile all cpp in directory, executable name path
 xcRun  patch - run (local executable) patch on remote
-xcCompileRun patch.cpp  - compile local file and run on remote
+xcCompileRun patch  - compile local file and run on remote 
 xcScope - bring up scope
 xcGui - bring up gui
 

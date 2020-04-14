@@ -15,19 +15,22 @@ fi
 
 export XC_IP=${XC_IP:=192.168.7.2}
 export XC_ROOT=${XC_ROOT:="`realpath ~/xcBela`"}
-export XC_SSH=${XC_SSH:=root@$XC_IP}
+export XC_USER=${XC_USER:=root}
+export XC_SSH=${XC_USER}@${XC_IP}
+
 
 export BBB_HOSTNAME=$XC_IP
 export BBB_ADDRESS=$XC_SSH
 
 # store XC_IP/XC_ROOT for next time (user may have overridden)
-echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT;export XC_SSH=$XC_SSH" > ~/.xcBela.config
+echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT;export XC_USER=$XC_USER" > ~/.xcBela.config
 
 
 # cant use this, as env scripts cannot get filename 
 # export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
 echo export XC_IP=$XC_IP
 echo export XC_ROOT=$XC_ROOT
+echo export XC_USER=$XC_USER
 
 export PATH=${XC_ROOT}/scripts:${XC_ROOT}/Bela/scripts:$PATH
 echo PATH=$PATH

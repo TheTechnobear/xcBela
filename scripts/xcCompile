@@ -65,10 +65,9 @@ export XC_OPTS=" \
 export XC_CPPFLAGS="${BELA_C_OPTS} ${CPPFLAGS}"
 export XC_LDFLAGS="${BELA_LD_OPTS} ${LDFLAGS}"
 
-FILE=$1
 MAIN=`realpath $XC_SYSROOT/root/Bela/default_main.cpp`
-OUTFILE="${FILE%.*}"
 
+OUTFILE=$1
 
-echo ${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${XC_LDFLAGS} -o ${OUTFILE} ${FILE} ${MAIN}
-${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${XC_LDFLAGS} -o ${OUTFILE} ${MAIN} ${FILE} 
+echo ${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${XC_LDFLAGS} -o ${OUTFILE} ${MAIN} *.cpp
+${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${XC_LDFLAGS} -o ${OUTFILE} ${MAIN} *.cpp
