@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
 fi
 
 do_upgrade=0
-while getopts "q?" opt
+while getopts "u?" opt
 do
     case $opt in
     (u) do_upgrade=1 ;;
