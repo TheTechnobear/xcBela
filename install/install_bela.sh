@@ -15,7 +15,7 @@ echo update bela lib
 #branch
 BRANCH=`git branch --show-current`
 git push $XC_SSH:Bela $BRANCH:tmp-$BRANCH
-ssh $XC_SSH "cd Bela && git checkout $BRANCH && git merge tmp-$BRANCH && git branch -D tmp-$BRANCH && make lib"
+ssh $XC_SSH "cd Bela && git reset --hard && git clean -xfd && git checkout $BRANCH && git merge tmp-$BRANCH && git branch -D tmp-$BRANCH && make -f Makefile.libraries && rm lib/* && make lib"
 
 cd "$XC_ROOT"
 
