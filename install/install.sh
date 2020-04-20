@@ -17,11 +17,14 @@ if [ $? -ne 0 ]; then
 fi
 
 do_upgrade=0
-while getopts "u?" opt
+do_quick=0
+
+while getopts "uq?" opt
 do
     case $opt in
     (u) do_upgrade=1 ;;
-    (?) echo "-u = upgrade" && exit 1 ;;
+    (q) do_quick=1 && do_upgrade=1 ;;
+    (?) echo "-u = upgrade -q = quick" && exit 1 ;;
     (*) printf "Illegal option '-%s'\n" "$opt" && exit 1 ;;
     esac
 done
@@ -35,10 +38,10 @@ if [ $do_upgrade -eq 0 ]; then
   PLATFORM=`uname`
   if [ "${PLATFORM}" = "Darwin" ]; then
     echo install mac tools
-    ${XC_ROOT}/install/install_mac.sh
+    ${XC_ROOT}/install/install_mac.sh $*
   else
     echo install linux tools
-    ${XC_ROOT}/install/install_linux.sh
+    ${XC_ROOT}/install/install_linux.sh $*
   fi 
 fi
 
@@ -60,7 +63,7 @@ fi
 
 
 if [ $do_upgrade -eq 0 ]; then
-  ./install/install_os.sh
+  ./install/install_os.sh $*
 fi
 
-./install/install_bela.sh
+./install/install_bela.sh $*

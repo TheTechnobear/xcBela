@@ -8,14 +8,31 @@ export XC_SSH=${XC_USER}@${XC_IP}
 
 export BBB_ADDRESS=$XC_SSH
 
-cd "$XC_ROOT/Bela"
-echo update bela lib
-#ensure that we have the same version of Bela on host and remote
-#cannot push straight to the branch as it is most likely the currently checkout
-#branch
-BRANCH=`git branch --show-current`
-git push $XC_SSH:Bela $BRANCH:tmp-$BRANCH
-ssh $XC_SSH "cd Bela && git reset --hard && git clean -xfd && git checkout $BRANCH && git merge tmp-$BRANCH && git branch -D tmp-$BRANCH && make -f Makefile.libraries && rm lib/* && make lib"
+
+
+do_upgrade=0
+do_quick=0
+
+while getopts "uq?" opt
+do
+    case $opt in
+    (u) do_upgrade=1 ;;
+    (q) do_quick=1 && do_upgrade=1 ;;
+    (?) echo "-u = upgrade -q = quick" && exit 1 ;;
+    (*) printf "Illegal option '-%s'\n" "$opt" && exit 1 ;;
+    esac
+done
+
+export upgrade_opts=" "
+
+if [ $do_quick -eq 0 ]; then
+    upgrade_opts = " --no-frills "
+fi
+
+cd "$XC_ROOT"
+# ./Bela/scripts/update_board -y $upgrade_opts
+
+ssh $XC_SSH "cd Bela && make -f Makefile.libraries && rm lib/* && make lib"
 
 cd "$XC_ROOT"
 
