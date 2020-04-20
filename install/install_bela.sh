@@ -30,9 +30,11 @@ if [ $do_quick -eq 0 ]; then
 fi
 
 cd "$XC_ROOT"
-# ./Bela/scripts/update_board -y $upgrade_opts
+./Bela/scripts/update_board -y $upgrade_opts
 
-ssh $XC_SSH "cd Bela && make -f Makefile.libraries && rm lib/* && make lib"
+ssh $XC_SSH "cd Bela && rm lib/*"
+ssh $XC_SSH "cd Bela && make -f Makefile.libraries cleanall && make -f Makefile.libraries all"
+ssh $XC_SSH "cd Bela && make lib && make libbelafull"
 
 cd "$XC_ROOT"
 
