@@ -26,7 +26,7 @@ done
 export upgrade_opts=" "
 
 if [ $do_quick -eq 0 ]; then
-    upgrade_opts = " --no-frills "
+    upgrade_opts=" --no-frills "
 fi
 
 cd "$XC_ROOT"
