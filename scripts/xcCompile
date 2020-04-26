@@ -49,7 +49,7 @@ export BELA_LD_OPTS=" \
     -lcobalt -lmodechk -lpthread -lrt\
     -lprussdrv -lstdc++ -lasound -lseasocks -lNE10 -lmathneon -ldl \
     -latomic \
-    -lbelafull \
+    -l:libbelafull.a\
 "
 
 
