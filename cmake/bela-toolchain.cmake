@@ -35,7 +35,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${XC_SYSROOT}/root/Bela -I${XC_SYSROOT
 
 set(BELA_LINK_FLAGS "${BELA_LINK_FLAGS} -L${XC_SYSROOT}/root/Bela/lib -L${XC_SYSROOT}/usr/local/lib -Wl,--no-as-needed -L${XC_SYSROOT}/usr/xenomai/lib" ) 
 set(BELA_LINK_FLAGS "${BELA_LINK_FLAGS} -lprussdrv -lasound -lseasocks -lNE10 -lmathneon -ldl") 
-set(BELA_LINK_FLAGS "${BELA_LINK_FLAGS} -lbela -lbelaextra") 
+set(BELA_LINK_FLAGS "${BELA_LINK_FLAGS} -l:libbelafull.a") 
 set(BELA_LINK_FLAGS "${BELA_LINK_FLAGS} -L${XC_SYSROOT}/usr/lib/gcc/arm-linux-gnueabihf/6.3.0  -B${XC_SYSROOT}/usr/lib/gcc/arm-linux-gnueabihf/6.3.0  -latomic")
 set(BELA_LINK_FLAGS "${BELA_LINK_FLAGS} -Wl,-rpath-link,${XC_SYSROOT}/lib/arm-linux-gnueabihf")
 
