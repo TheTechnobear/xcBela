@@ -46,4 +46,5 @@ if [ $? -ne 0 ]; then
     brew install git
 else
     brew upgrade git
+fi
 
