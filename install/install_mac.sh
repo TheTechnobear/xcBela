@@ -10,41 +10,11 @@ else
 fi
 
 #install or upgrade required tools
-BOTDIR=~/Library/Caches/Homebrew
+# brew install unless already installed
+brewIn() { if brew ls --versions "$1"; then brew upgrade "$1" ; else brew install "$1"; fi }
 
-ls $BOTDIR/rsync* > /dev/null 2>&1
-if [ $? -ne 0 ]; then 
-    brew install rsync
-else
-    brew upgrade rsync
-fi
-
-ls $BOTDIR/coreutils* > /dev/null 2>&1
-if [ $? -ne 0 ]; then 
-    brew install coreutils
-else
-    brew upgrade coreutils
-fi
-
-ls $BOTDIR/arm-linux-gnueabihf-binutils* > /dev/null 2>&1
-if [ $? -ne 0 ]; then 
-    brew install arm-linux-gnueabihf-binutils
-else
-    brew upgrade arm-linux-gnueabihf-binutils
-fi
-
-ls $BOTDIR/llvm* > /dev/null 2>&1
-if [ $? -ne 0 ]; then 
-    brew install llvm
-else
-    brew upgrade llvm
-fi
-
-
-ls $BOTDIR/git* > /dev/null 2>&1
-if [ $? -ne 0 ]; then 
-    brew install git
-else
-    brew upgrade git
-fi
-
+#install required tools
+for PACKAGE in arm-linux-gnueabihf-binutils llvm rsync coreutils git
+do
+	brewIn $PACKAGE;
+done
