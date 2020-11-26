@@ -77,9 +77,9 @@ echo Commands
 echo ============================
 echo xcExec remotecmd - execute command on remote 
 echo xcCopy localfile remotefile - copy local file to remote 
-echo xcCompile patch.cpp - compile single c++ file
-echo xcRun  patch - run local executable patch on remote
-echo xcCompileRun patch.cpp  - compile local file and run on remote
+echo xcCompile outputName - compile all .cpp files in the current folder
+echo xcRun fileName - run local executable file on remote
+echo xcCompileRun outputName - compile all .cpp files in the current folder and run on remote
 echo xcScope - bring up scope
 echo xcGui - bring up gui
 
