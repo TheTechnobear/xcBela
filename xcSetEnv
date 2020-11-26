@@ -1,10 +1,13 @@
-#!/bin/bash
+# You should source this file and not execute it
 
-if [ "$0" != "-bash"  -a  "$0" != "/bin/bash" ] ; then  
+# detect if we are being sourced
+# courtesy of https://stackoverflow.com/a/28776166/2958741
+(return 0 2>/dev/null) && sourced=1 || sourced=0
+if [ $sourced -eq 0 ]; then
     echo must be run as 
     echo . ~/xcBela/xcSetEnv
+    exit
 fi
-
 
 if [ "$XC_ROOT" == "" -o "$XC_IP" == "" -o "$XC_SSH" == "" ] ; then
     if [ -f ~/.xcBela.config ] ; then 
