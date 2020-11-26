@@ -70,5 +70,6 @@ MAIN=`realpath $XC_ROOT/Bela/Core/default_main.cpp`
 
 OUTFILE=$1
 
-echo ${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${MAIN} *.cpp ${XC_LDFLAGS} -o ${OUTFILE} 
+set -x
 ${CLANG} ${XC_OPTS} ${XC_CPPFLAGS} ${MAIN} *.cpp ${XC_LDFLAGS} -o ${OUTFILE} 
+set +x
