@@ -9,15 +9,15 @@ if [ $sourced -eq 0 ]; then
     exit
 fi
 
-if [ "$XC_ROOT" == "" -o "$XC_IP" == "" -o "$XC_SSH" == "" ] ; then
-    if [ -f ~/.xcBela.config ] ; then 
-        echo using ~/.bxcBela.config
+#if [ "$XC_ROOT" == "" ] || [ "$XC_IP" == "" ] || [ "$XC_SSH" == "" ] ; then
+    if [ -f ~/.xcBela.config ] ; then
+        echo using ~/.xcBela.config
         . ~/.xcBela.config
     fi
-fi
+#fi
 
 export XC_IP=${XC_IP:=192.168.7.2}
-export XC_ROOT=${XC_ROOT:="`realpath ~/xcBela`"}
+export XC_ROOT=${XC_ROOT:="$(realpath ~/xcBela)"}
 export XC_USER=${XC_USER:=root}
 export XC_SSH=${XC_USER}@${XC_IP}
 
@@ -32,21 +32,20 @@ echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT;export XC_USER=$XC_USER" > ~/
 # cant use this, as env scripts cannot get filename 
 # export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
 echo export XC_IP=$XC_IP
-echo export XC_ROOT=$XC_ROOT
+echo export XC_ROOT="$XC_ROOT"
 echo export XC_USER=$XC_USER
 
 export PATH=${XC_ROOT}/scripts:${XC_ROOT}/Bela/scripts:$PATH
-echo PATH=$PATH
+echo PATH="$PATH"
 
 
-ping -c 1 -t 1 $XC_IP >/dev/null 2>&1 
-if [ $? -ne 0 ]; then
+if ping -c 1 -t 1 $XC_IP >/dev/null 2>&1 -ne 0; then
     echo WARNING: unable to connect to ${XC_IP}, check XC_IP?
 fi
 
 
 
-PLATFORM=`uname`
+PLATFORM=$(uname)
 if [ "${PLATFORM}" = "Darwin" ]; then
     alias xcScope="open http://${XC_IP}/scope"
     alias xcGui="open http://${XC_IP}/gui"
@@ -69,17 +68,16 @@ xcCopy() {
 
 # echo stop running patch and ide on bela
 # ./Bela/scripts/stop_running.sh  > /dev/null 2>&1
-# ./Bela/scripts/ide.sh stop > /dev/null 2>&1 
+# ./Bela/scripts/ide.sh stop > /dev/null 2>&1
 
-echo ============================
-echo Commands
-
-echo ============================
-echo xcExec remotecmd - execute command on remote 
-echo xcCopy localfile remotefile - copy local file to remote 
-echo xcCompile outputName - compile all .cpp files in the current folder
-echo xcRun fileName - run local executable file on remote
-echo xcCompileRun outputName - compile all .cpp files in the current folder and run on remote
-echo xcScope - bring up scope
-echo xcGui - bring up gui
+echo "============================"
+echo "Commands"
+echo "============================"
+echo "xcExec remotecmd - execute command on remote"
+echo "xcCopy localfile remotefile - copy local file to remote"
+echo "xcCompile outputName - compile all .cpp files in the current folder"
+echo "xcRun fileName - run local executable file on remote"
+echo "xcCompileRun outputName - compile all .cpp files in the current folder and run on remote"
+echo "xcScope - bring up scope"
+echo "xcGui - bring up gui"
 
