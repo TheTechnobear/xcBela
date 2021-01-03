@@ -12,6 +12,7 @@ fi
 #if [ "$XC_ROOT" == "" ] || [ "$XC_IP" == "" ] || [ "$XC_SSH" == "" ] ; then
     if [ -f ~/.xcBela.config ] ; then
         echo using ~/.xcBela.config
+        # shellcheck source=/dev/null
         . ~/.xcBela.config
     fi
 #fi
@@ -47,12 +48,12 @@ fi
 
 PLATFORM=$(uname)
 if [ "${PLATFORM}" = "Darwin" ]; then
-    alias xcScope="open http://${XC_IP}/scope"
-    alias xcGui="open http://${XC_IP}/gui"
+    alias xcScope="open http://\${XC_IP}/scope"
+    alias xcGui="open http://\${XC_IP}/gui"
 else
-    alias xcScope="chromium-browser http://${XC_IP}/scope"
-    alias xcGui="chromium-browser http://${XC_IP}/gui"
-fi 
+    alias xcScope="\$BROWSER http://\${XC_IP}/scope"
+    alias xcGui="\$BROWSER http://\${XC_IP}/gui"
+fi
 
 
 
@@ -62,8 +63,8 @@ xcExec() {
 }
 
 xcCopy() {
-    echo scp -o LogLevel=ERROR $1 $XC_SSH:$2
-    scp -o LogLevel=ERROR $1 $XC_SSH:$2
+    echo scp -o LogLevel=ERROR "$1" $XC_SSH:"$2"
+    scp -o LogLevel=ERROR "$1" $XC_SSH:"$2"
 }
 
 # echo stop running patch and ide on bela
@@ -80,4 +81,3 @@ echo "xcRun fileName - run local executable file on remote"
 echo "xcCompileRun outputName - compile all .cpp files in the current folder and run on remote"
 echo "xcScope - bring up scope"
 echo "xcGui - bring up gui"
-
