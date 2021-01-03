@@ -10,7 +10,7 @@ echo XC_IP : $XC_IP, XC_ROOT : "$XC_ROOT", XC_USER $XC_USER
 
 echo "export XC_IP=$XC_IP; export XC_ROOT=$XC_ROOT;export XC_USER=$XC_USER" > ~/.xcBela.config
 
-if ping -c 1 -t 1 $XC_IP >/dev/null 2>&1; then
+if ping -c 1 -t 1 $XC_IP >/dev/null 2>&1 -ne 0; then
     echo WARNING: unable to connect to ${XC_IP}, check XC_IP?
     exit 1
 fi

@@ -2,7 +2,7 @@
 set -e
 
 #install homebrew
-if which brew > /dev/null 2>&1; then 
+if which brew > /dev/null 2>&1 -ne 0; then 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 else
     brew update
