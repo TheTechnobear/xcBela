@@ -11,7 +11,7 @@ case "$DISTRO" in
                 clang \
                 arm-none-eabi-binutils arm-none-eabi-gcc arm-none-eabi-newlib
         ;;
-    "Ubuntu"|"Debiuan") echo "Deb"
+    "Ubuntu"|"Debian") echo "Deb"
             sudo apt-get install \
                 libllvm-10-ocaml-dev libllvm10 llvm-10 llvm-10-dev \
                 llvm-10-doc llvm-10-examples llvm-10-runtime \
