@@ -72,8 +72,8 @@ we need to add to /etc/apt/sources.list , 2 lines
 which depends on the version of ubuntu you are using, e.g. for bionic, we add the following two lines:
 
 ```
-deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main`
-deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main `
+deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main
+deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main
 ```
 
 once we have done this we need to add the llvm key, to authorise, and then update apt
