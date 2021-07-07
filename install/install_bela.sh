@@ -2,7 +2,7 @@
 set -e
 BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
-export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
+export XC_ROOT=${XC_ROOT:="$(realpath "$BASEDIR"/..)"}
 export XC_USER=${XC_USER:=root}
 export XC_SSH=${XC_USER}@${XC_IP}
 
@@ -10,27 +10,27 @@ export BBB_ADDRESS=$XC_SSH
 
 
 
-do_upgrade=0
+export do_upgrade=0
 do_quick=0
 
 while getopts "uq?" opt
 do
     case $opt in
-    (u) do_upgrade=1 ;;
-    (q) do_quick=1 && do_upgrade=1 ;;
-    (?) echo "-u = upgrade -q = quick" && exit 1 ;;
-    (*) printf "Illegal option '-%s'\n" "$opt" && exit 1 ;;
+        (u) do_upgrade=1 ;;
+        (q) do_quick=1 && do_upgrade=1 ;;
+        (?) echo "-u = upgrade -q = quick" && exit 1 ;;
+        (*) printf "Illegal option '-%s'\n" "$opt" && exit 1 ;;
     esac
 done
 
-export upgrade_opts=" "
+export upgrade_opts=""
 
 if [ $do_quick -eq 0 ]; then
-    upgrade_opts=" --no-frills "
+    upgrade_opts="--no-frills"
 fi
 
 cd "$XC_ROOT"
-./Bela/scripts/update_board -y $upgrade_opts
+./Bela/scripts/update_board -y "$upgrade_opts"
 
 ssh $XC_SSH "cd Bela && rm lib/*"
 ssh $XC_SSH "cd Bela && make -f Makefile.libraries cleanall && make -f Makefile.libraries all"
