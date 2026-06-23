@@ -34,7 +34,7 @@ cd "$XC_ROOT"
 
 ssh $XC_SSH "cd Bela && rm lib/*"
 ssh $XC_SSH "cd Bela && make -f Makefile.libraries cleanall && make -f Makefile.libraries all"
-ssh $XC_SSH "cd Bela && make lib && make libbelafull"
+ssh $XC_SSH "cd Bela && make lib"
 
 cd "$XC_ROOT"
 

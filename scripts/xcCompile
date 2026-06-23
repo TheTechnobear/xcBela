@@ -3,17 +3,22 @@ BASEDIR=$(dirname "$0")
 export XC_IP=${XC_IP:=192.168.7.2}
 export XC_ROOT=${XC_ROOT:="`realpath $BASEDIR/..`"}
 
-XC_SYSROOT=${XC_ROOT}/sysroot
+XC_SYSROOT=${XC_SYSROOT:-${XC_ROOT}/sysroot}
 
 
 PLATFORM=`uname`
 if [ "${PLATFORM}" = "Darwin" ]; then
-    export TOOLCHAIN=/usr/local/opt
+    # Homebrew root moved to /opt/homebrew on Apple Silicon
+    if [ -d /opt/homebrew/opt/llvm ]; then
+        export TOOLCHAIN=/opt/homebrew/opt
+    else
+        export TOOLCHAIN=/usr/local/opt
+    fi
     export CLANG=$TOOLCHAIN/llvm/bin/clang++
 else
     export TOOLCHAIN=/usr/lib/llvm-10
     export CLANG=/usr/bin/clang++-10
-fi 
+fi
 
 # echo export TOOLCHAIN=$TOOLCHAIN
 # echo export CLANG=$CLANG
@@ -49,7 +54,7 @@ export BELA_LD_OPTS=" \
     -lcobalt -lmodechk -lpthread -lrt\
     -lprussdrv -lstdc++ -lasound -lseasocks -lNE10 -lmathneon -ldl \
     -latomic \
-    -l:libbelafull.a\
+    -l:libbela.a -l:libbelaextra.a\
 "
 
 
@@ -61,7 +66,7 @@ export XC_OPTS=" \
  -isystem ${XC_SYSROOT}/usr/include/arm-linux-gnueabihf/c++/6.3.0 \
  -L${XC_SYSROOT}/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
  -B${XC_SYSROOT}/usr/lib/gcc/arm-linux-gnueabihf/6.3.0 \
- --gcc-toolchain=TOOLCHAIN/arm-linux-gnueabihf-binutils \
+ --gcc-toolchain=${TOOLCHAIN}/arm-linux-gnueabihf-binutils \
 "
 export XC_CPPFLAGS="${BELA_C_OPTS} ${CPPFLAGS}"
 export XC_LDFLAGS="${BELA_LD_OPTS} ${LDFLAGS}"
